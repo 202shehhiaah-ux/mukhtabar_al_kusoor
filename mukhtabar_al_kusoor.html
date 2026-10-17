@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>مختبر الكسور | آمنة الشحية</title>
+<style>
+:root{--green:#176348;--gold:#c5a45c;--cream:#f6f1e5;--ink:#203c30}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Tahoma,Arial,sans-serif;line-height:1.7}
+main{max-width:760px;margin:24px auto;padding:16px}.hero{background:linear-gradient(135deg,#124d3a,#217657);color:#fff;border:3px solid var(--gold);border-radius:22px;padding:26px;text-align:center;position:relative;overflow:hidden}
+.hero:before,.hero:after{content:"✦";position:absolute;color:#e8cf8d;font-size:42px;opacity:.75}.hero:before{top:8px;right:18px}.hero:after{bottom:8px;left:18px}
+.emblem{font-size:34px;color:#f0d58e}.hero h1{font-size:clamp(28px,5vw,42px);margin:4px 0}.hero p{margin:4px}.tag{color:#f0d58e;font-weight:bold}
+.panel{background:white;border:1px solid #e2d5b8;border-radius:20px;padding:22px;margin-top:18px;box-shadow:0 8px 25px #183e2a0b}
+h2{color:var(--green);text-align:center;margin:0 0 6px}.sub{text-align:center;color:#64746a;margin:0 0 20px}
+.inputs{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field label{display:block;text-align:center;color:var(--green);font-weight:bold;margin-bottom:7px}
+input{width:100%;font-size:25px;text-align:center;padding:12px;border:2px solid #d6c69e;border-radius:12px;color:var(--green);background:#fffdf8}
+input:focus{outline:3px solid #b9d7c6;border-color:var(--green)}
+.fraction{margin:24px auto;display:flex;flex-direction:column;align-items:center;width:120px;font-size:30px;font-weight:bold;color:var(--green);line-height:1.35}.fraction .line{width:100%;height:3px;background:var(--gold);margin:4px 0}
+button{font-family:inherit;cursor:pointer;border:0;border-radius:12px;padding:13px 16px;font-size:17px;font-weight:bold}
+.primary{display:block;width:100%;background:var(--green);color:#fff}.secondary{background:#fff;border:1px solid #c7b27e;color:var(--green)}
+.actions{display:flex;gap:10px;margin-top:10px}.actions button{flex:1}
+.result{display:none;margin-top:20px;background:#e9f3e8;border:1px solid #b6d4b5;border-radius:16px;padding:18px}.result h3{color:var(--green);text-align:center;margin:0}.steps{background:#fff;border-radius:12px;padding:12px;margin-top:12px}.error{display:none;color:#8e3024;background:#fce9e5;border-radius:12px;padding:12px;margin-top:14px}
+.examples{background:#efe4c9}.examples h3{color:#75531c;margin:0}.chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:10px}.chips button{background:white;border:1px solid #d6c08d;color:var(--green);flex:1;min-width:95px}
+footer{text-align:center;padding:20px;color:#617267}footer strong{color:var(--green)}
+@media(max-width:480px){main{padding:10px;margin:10px auto}.panel{padding:16px}.actions{flex-direction:column}.hero{padding:22px 14px}}
+</style>
+</head>
+<body><main>
+<header class="hero"><div class="emblem">☪ ✦ ⚔</div><h1>مختبر الكسور</h1><p class="tag">نتعلّم، نجرّب، ونكتشف!</p><p>الرياضيات بأسلوب ممتع</p><hr style="border:0;border-top:1px solid #c5a45c;margin:18px 0"><p>سلطنة عُمان 🇴🇲</p><p class="tag">معلمة المادة: آمنة الشحية</p></header>
+<section class="panel">
+<h2>آلة تبسيط الكسور</h2><p class="sub">أدخلي البسط والمقام، واكتشفي أبسط صورة للكسر.</p>
+<div class="inputs"><div class="field"><label for="num">البسط — العدد العلوي</label><input id="num" inputmode="numeric" value="٦" aria-label="البسط"></div><div class="field"><label for="den">المقام — العدد السفلي</label><input id="den" inputmode="numeric" value="٨" aria-label="المقام"></div></div>
+<div class="fraction" aria-label="الكسر المدخل"><span id="showNum">٦</span><span class="line"></span><span id="showDen">٨</span></div>
+<button class="primary" id="calculate">احسبي أبسط صورة ✨</button><div class="actions"><button class="secondary" data-example="6,8">مثال: ٦⁄٨</button><button class="secondary" id="clear">مسح وإعادة المحاولة</button></div>
+<div class="error" id="error" role="alert"></div>
+<div class="result" id="result" aria-live="polite"><h3>أحسنتِ! اكتشفنا أبسط صورة</h3><p style="text-align:center;margin-bottom:0">الناتج النهائي</p><div class="fraction"><span id="outNum">٣</span><span class="line"></span><span id="outDen">٤</span></div><div class="steps"><strong style="color:#176348">خطوات التبسيط</strong><p id="step1"></p><p id="step2"></p><p id="step3"></p><p id="step4"></p><p id="already" style="font-weight:bold;color:#176348"></p></div></div>
+</section>
+<section class="panel examples"><h3>💡 جرّبي بنفسك</h3><p style="margin:4px 0;color:#6c552b">اختاري كسرًا من الأمثلة ثم اضغطي زر الحساب.</p><div class="chips"><button data-example="6,8">٦⁄٨</button><button data-example="10,15">١٠⁄١٥</button><button data-example="12,18">١٢⁄١٨</button><button data-example="7,21">٧⁄٢١</button><button data-example="25,100">٢٥⁄١٠٠</button></div></section>
+<footer><strong>مختبر الكسور</strong><br>إعداد وإشراف المعلمة آمنة الشحية<br>عُمان • نتعلّم الرياضيات بالإبداع</footer>
+</main>
+<script>
+const ar='٠١٢٣٤٥٦٧٨٩';
+function arabic(s){return String(s).replace(/\d/g,d=>ar[+d])}
+function western(s){return String(s).replace(/[٠-٩]/g,d=>String('٠١٢٣٤٥٦٧٨٩'.indexOf(d))).replace(/[۰-۹]/g,d=>String('۰۱۲۳۴۵۶۷۸۹'.indexOf(d))).replace(/[٬,]/g,'').trim()}
+const $=id=>document.getElementById(id);
+function updatePreview(){$('showNum').textContent=$('num').value||'؟';$('showDen').textContent=$('den').value||'؟'}
+$('num').addEventListener('input',updatePreview);$('den').addEventListener('input',updatePreview);
+function gcd(a,b){while(b){[a,b]=[b,a%b]}return Math.abs(a)}
+$('calculate').addEventListener('click',()=>{
+ const ns=western($('num').value),ds=western($('den').value);
+ $('error').style.display='none';$('result').style.display='none';
+ if(!/^\d+$/.test(ns)||!/^\d+$/.test(ds)){showError('يرجى إدخال أعداد صحيحة في البسط والمقام.');return}
+ const n=Number(ns),d=Number(ds);
+ if(!Number.isSafeInteger(n)||!Number.isSafeInteger(d)||n>1000000000||d>1000000000){showError('يرجى إدخال أعداد صحيحة أصغر من مليار.');return}
+ if(d===0){showError('لا يمكن أن يكون المقام صفرًا.');return}
+ const g=gcd(n,d),a=n/g,b=d/g;
+ $('outNum').textContent=arabic(a);$('outDen').textContent=arabic(b);
+ $('step1').textContent='١. نبحث عن أكبر عدد يقسم البسط والمقام دون باقٍ.';
+ $('step2').textContent='٢. القاسم المشترك الأكبر هو: '+arabic(g)+'.';
+ $('step3').textContent='٣. نقسم البسط '+arabic(n)+' والمقام '+arabic(d)+' على '+arabic(g)+'.';
+ $('step4').textContent=arabic(n)+' ÷ '+arabic(g)+' = '+arabic(a)+' ، و '+arabic(d)+' ÷ '+arabic(g)+' = '+arabic(b)+'.';
+ $('already').textContent=g===1?'هذا الكسر في أبسط صورة بالفعل! 🌟':'';
+ $('result').style.display='block';
+});
+function showError(t){$('error').textContent=t;$('error').style.display='block'}
+document.querySelectorAll('[data-example]').forEach(btn=>btn.addEventListener('click',()=>{const [n,d]=btn.dataset.example.split(',');$('num').value=arabic(n);$('den').value=arabic(d);updatePreview();$('result').style.display='none';$('error').style.display='none'}));
+$('clear').addEventListener('click',()=>{$('num').value='';$('den').value='';updatePreview();$('result').style.display='none';$('error').style.display='none';$('num').focus()});
+</script></body></html>
